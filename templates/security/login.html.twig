@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+{% endblock %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="wrapper fadeInDown">
+	<div id="formContent">
+		<!-- On Submit Errors -->
+		{% if error %}
+		<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
+
+		<!-- Icon -->
+		<div class="fadeIn first">
+			<img id="icon" class="m-3 fadeIn first" src="{{ asset('images/logo.png') }}" alt="">
+		</div>
+
+		<!-- Login Form -->
+		<form method="post">
+			<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="fadeIn second" placeholder="Identifiant"
+			 required autofocus>
+			<input type="password" name="password" id="inputPassword" class="fadeIn third" placeholder="Mot de passe" required>
+
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			<div class="d-flex justify-content-center align-items-center fadeIn fifth">
+				<label class="label-checkbox">Se souvenir de moi</label>
+				<input type="checkbox" class="checkbox" name="_remember_me">
+			</div>
+
+			<button type="submit" class="btn btn-lg mb-3 fadeIn sixth">Connexion</button>
+		</form>
+
+		<!-- Remind Passowrd -->
+		<div id="formFooter">
+			<a class="underlineHover fadeIn fifth" href="#">Mot de passe oublié ?</a>
+		</div>
+
+	</div>
+</div>
+{% endblock %}
